@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: whoami/.
+    volumes:
+      - ./whoami:/app
+      - static_data:/vol/web
+    environment:
+      - DB_HOST=db
+      - DB_NAME=whoami
+      - DB_USER=yogi
+      - DB_PASS=yogi9644
+      - ALLOWED_HOSTS=127.0.0.1
+    depends_on:
+      - db
+
+  proxy:
+    image: proxy:latest
+    depends_on:
+      - app
+    ports:
+      - "8000:8000"
+    volumes:
+      - static_data:/vol/static
+
+  db:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=whoami
+      - POSTGRES_USER=yogi
+      - POSTGRES_PASSWORD=yogi9644
+
+volumes:
+  static_data:
