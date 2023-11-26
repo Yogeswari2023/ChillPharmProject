@@ -1,7 +1,7 @@
 provider "aws" {
     region = "us-east-1"
-	access_key = "AKIARHX2TCIFLJAQWR6D"
-	secret_key = "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"
+	access_key = "<aws access key>"
+	secret_key = "<aws secret key>"
 }
 provider "aws" {
     alias = "dns_zones"
